@@ -96,8 +96,9 @@
             createdAt:new Date().toISOString()
         }
         todos.unshift(todo)
-        saveTodos()
+        saveAtLocalStorage()
         renderUpdatedTodo()
+        input.value=""
     }
 }
     
@@ -111,7 +112,7 @@
     li.className=`todo-item ${todo.completed?"completed":""}`
     li.id=todo.id;
     li.innerHTML=`
-    <input type="checkbox" ${todo.completed?"checked":""} >
+    <input type="checkbox" ${todo.completed?"checked":""}  onchange="toggleTodo(${todo.id})">
     <span class="todo-text">${todo.text}</span>
     <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
     `
@@ -121,11 +122,26 @@
     })
 
 }
+    function toggleTodo(id){
+         todos=todos.map((todo)=>{
+            return todo.id ===id?{...todo,completed:!todo.completed} :todo
+         })
+         saveAtLocalStorage()
+         renderUpdatedTodo()
 
-    function saveTodos(){
+    }
+
+    function saveAtLocalStorage(){
     localStorage.setItem("todos",JSON.stringify(todos))
 }
-renderUpdatedTodo()
+
+    function deleteTodo(id){
+        todos=todos.filter((todo)=>todo.id !==id)
+        saveAtLocalStorage()
+        renderUpdatedTodo()
+
+    }
+    renderUpdatedTodo()
 
 </script>
 </html>
