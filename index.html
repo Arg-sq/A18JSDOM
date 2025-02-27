@@ -97,10 +97,11 @@ function  renderUpdatedTodo(){
     li.className=`todo-item ${todo.completed?"completed":""}`
     li.id=todo.id;
     li.innerHTML=`
-    <input type="checkbox">
+    <input type="checkbox" ${todo.completed?"checked":""} >
     <span class="todo-text">${todo.text}</span>
     <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
     `
+    todolist.appendChild(li)
 
 
     })
