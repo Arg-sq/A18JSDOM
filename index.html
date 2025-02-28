@@ -65,6 +65,15 @@
         .todo-item:hover{
             transform: translateX(5px);
         }
+        .delete-btn{
+            background: rgb(228, 40, 40);
+        }
+        .delete-btn:hover{
+            background: rgb(192, 8, 8);;
+        }
+        .todo-text{
+            flex:1
+        }
     </style>
 </head>
 <body>
@@ -116,10 +125,22 @@
     <span class="todo-text">${todo.text}</span>
     <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
     `
+
+    li.querySelector(".todo-text").addEventListener("dblclick",()=>{
+        startEdit(todo.id,todo.text)
+    })
     todolist.appendChild(li)
 
 
     })
+
+}
+function startEdit(todoId,currentText){
+    const li=document.getElementById(todoId)
+    const input=document.createElement("input")
+    input.className="edit-input"
+    input.value=currentText
+    li.querySelector(".todo-text").replaceWith(input)
 
 }
     function toggleTodo(id){
