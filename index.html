@@ -141,6 +141,13 @@ function startEdit(todoId,currentText){
     input.className="edit-input"
     input.value=currentText
     li.querySelector(".todo-text").replaceWith(input)
+    input.focus()
+    
+    input.addEventListener("keypress",(e)=>{
+    if(e.key==="Enter"){
+    editTodo(id,input.value)   
+    }
+})
 
 }
     function toggleTodo(id){
