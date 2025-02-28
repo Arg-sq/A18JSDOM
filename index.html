@@ -145,10 +145,20 @@ function startEdit(todoId,currentText){
     
     input.addEventListener("keypress",(e)=>{
     if(e.key==="Enter"){
-    editTodo(id,input.value)   
+    editTodo(todoId,input.value)   
     }
 })
 
+function editTodo(id,newText){
+    todos=todos.map((todo)=>
+        todo.id===id?{
+            ...todo,text:newText.trim()
+        }:todo
+    )
+    saveAtLocalStorage()
+    renderUpdatedTodo()
+
+}
 }
     function toggleTodo(id){
          todos=todos.map((todo)=>{
