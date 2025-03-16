@@ -122,7 +122,9 @@
     li.id=todo.id;
     li.innerHTML=`
     <input type="checkbox" ${todo.completed?"checked":""}  onchange="toggleTodo(${todo.id})">
-    <span class="todo-text">${todo.text}</span>
+    <span class="todo-text"
+    style={{textDecoration:"line-through"}}
+    >${todo.text}</span>
     <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
     `
 
@@ -138,7 +140,7 @@
 function startEdit(todoId,currentText){
     const li=document.getElementById(todoId)
     const input=document.createElement("input")
-    input.className="edit-input"
+input.className="edit-input"
     input.value=currentText
     li.querySelector(".todo-text").replaceWith(input)
     input.focus()
