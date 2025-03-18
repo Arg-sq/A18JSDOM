@@ -109,6 +109,9 @@
             <button class="filter-btn " onclick="filterTodos('completed')">Completed</button>
 
         </div>
+        <div id="stats">
+
+        </div>
         <ul class="todo-list" id="todolist">
         
         
@@ -148,8 +151,6 @@
 
     const todolist=document.getElementById("todolist")
     todolist.innerHTML=""
-
-   
     filterTodos.forEach((todo)=>{
     const li=document.createElement("li")
     li.className=`todo-item ${todo.completed?"completed":""}`
@@ -161,12 +162,11 @@
     >${todo.text}</span>
     <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
     `
-
     li.querySelector(".todo-text").addEventListener("dblclick",()=>{
         startEdit(todo.id,todo.text)
     })
     todolist.appendChild(li)
-
+    updateStats()
 
     })
 
@@ -223,7 +223,16 @@ function editTodo(id,newText){
          renderUpdatedTodo()
 
     }
-console.log(currentFilter)
+    function updateStats(){
+        console.log("rendere le call garyo")
+        const totalTodos=todos.length
+        const completed=todos.filter((todo)=>todo.completed).length
+        const active=totalTodos-completed
+
+        document.getElementById("stats").textContent=
+        `Total: ${totalTodos} | Completed: ${completed} | Active: ${active}`
+    }
+
     renderUpdatedTodo()
 
 </script>
